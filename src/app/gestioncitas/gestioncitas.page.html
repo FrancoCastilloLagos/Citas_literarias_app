@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestionar Citas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formularioCita" (ngSubmit)="agregarCita()">
+    <ion-item>
+      <ion-label position="floating">Frase</ion-label>
+      <ion-input formControlName="frase" placeholder="Ingresa la cita"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="formularioCita.get('frase')?.touched && formularioCita.get('frase')?.errors?.['required']" color="danger">
+      La frase es obligatoria.
+    </ion-note>
+    <ion-note *ngIf="formularioCita.get('frase')?.touched && formularioCita.get('frase')?.errors?.['minlength']" color="danger">
+      La frase debe tener al menos 5 caracteres.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Autor</ion-label>
+      <ion-input formControlName="autor" placeholder="Ingresa el autor"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="formularioCita.get('autor')?.touched && formularioCita.get('autor')?.errors?.['required']" color="danger">
+      El autor es obligatorio.
+    </ion-note>
+    <ion-note *ngIf="formularioCita.get('autor')?.touched && formularioCita.get('autor')?.errors?.['minlength']" color="danger">
+      El nombre del autor debe tener al menos 2 caracteres.
+    </ion-note>
+
+    <ion-button expand="full" type="submit" [disabled]="formularioCita.invalid">
+      Agregar Cita
+    </ion-button>
+  </form>
+
+  <ion-list>
+    <ion-item *ngFor="let cita of citas">
+      <ion-label>
+        <h2>{{ cita.frase }}</h2>
+        <p><strong>- {{ cita.autor }}</strong></p>
+      </ion-label>
+
+      <ion-button color="danger" (click)="eliminarCita(cita)" expand="full" slot="end">
+        Borrar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-cita
+    [cita]="citaAleatoria"
+    [mostrarBorrar]="mostrarBotonBorrar"
+    (borrar)="borrarCita()"
+  ></app-cita>
+
+  <ion-button (click)="cambiarCita()" expand="full" color="primary">Cambiar Cita</ion-button>
+
+  <ion-button expand="full" routerLink="/gestioncitas">Ir a Gestión de Citas</ion-button>
+
+  <ion-button expand="full" routerLink="/configuracion">Ir a Configuración</ion-button>
+</ion-content>
